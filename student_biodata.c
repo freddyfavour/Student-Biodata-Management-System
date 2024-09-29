@@ -16,7 +16,7 @@ struct Student
     char stateOfOrigin[30];
     char guardianPhone[15];
     char guardianEmail[50];
-    char NIN[15];
+    char NIN[10];
 };
 
 void selectProgram(char program[])
@@ -46,45 +46,90 @@ void addStudent(struct Student students[], int count)
 {
     printf("Enter student's name: ");
     scanf(" %[^\n]", students[count].name);
+
     printf("Enter matriculation number: ");
     scanf("%s", students[count].matricNumber);
+
     selectProgram(students[count].program);
+
     printf("Enter CGPA: ");
     scanf("%f", &students[count].CGPA);
+
     printf("Enter level: ");
     scanf("%d", &students[count].level);
+
     printf("Enter department: ");
     scanf(" %[^\n]", students[count].department);
+
     printf("Enter gender: ");
     scanf("%s", students[count].gender);
+
     printf("Enter phone number: ");
     scanf("%s", students[count].phoneNumber);
+
     printf("Enter email: ");
     scanf("%s", students[count].email);
+
     printf("Enter address: ");
     scanf(" %[^\n]", students[count].address);
+
     printf("Enter state of origin: ");
-    scanf("%s", students[count].stateOfOrigin);
+    scanf(" %[^\n]", students[count].stateOfOrigin);
+
     printf("Enter guardian's phone number: ");
     scanf("%s", students[count].guardianPhone);
+
     printf("Enter guardian's email: ");
     scanf("%s", students[count].guardianEmail);
+
     printf("Enter NIN: ");
     scanf("%s", students[count].NIN);
 
-    printf("Student added to the database.\n\n");
+    printf("\nStudent added to the LAUTECH's database.\n\n");
 }
 
 void viewStudents(struct Student students[], int count)
 {
+    printf("\nStudents by Program\n");
+    printf("Undergraduate Program Students\n");
     for (int i = 0; i < count; i++)
     {
-        printf("Name: %s,\n Program: %s,\n Matric Number: %s,\n CGPA: %.2f,\n Level: %d,\n Department: %s,\n Gender: %s,\n Phone: %s,\n Email: %s,\n Address: %s,\n State of Origin: %s,\n Guardian's Phone: %s,\n Guardian's Email: %s,\n NIN: %s,\n\n\n",
-               students[i].name, students[i].program, students[i].matricNumber, students[i].CGPA,
-               students[i].level, students[i].department, students[i].gender, students[i].phoneNumber,
-               students[i].email, students[i].address, students[i].stateOfOrigin, students[i].guardianPhone,
-               students[i].guardianEmail, students[i].NIN);
+        if (strcmp(students[i].program, "Undergraduate") == 0)
+        {
+            printf(" Name: %s,\n Program: %s,\n Matric Number: %s,\n CGPA: %.2f,\n Level: %d,\n Department: %s,\n Gender: %s,\n Phone: %s,\n Email: %s,\n Address: %s,\n State of Origin: %s,\n Guardian's Phone: %s,\n Guardian's Email: %s,\n NIN: %s",
+                   students[i].name, students[i].program, students[i].matricNumber, students[i].CGPA,
+                   students[i].level, students[i].department, students[i].gender, students[i].phoneNumber,
+                   students[i].email, students[i].address, students[i].stateOfOrigin, students[i].guardianPhone,
+                   students[i].guardianEmail, students[i].NIN);
+        }
     }
+    printf("\n\n");
+    printf("Part-Time Program Students\n");
+    for (int i = 0; i < count; i++)
+    {
+        if (strcmp(students[i].program, "Part-Time") == 0)
+        {
+            printf("\n Name: %s,\n Program: %s,\n Matric Number: %s,\n CGPA: %.2f,\n Level: %d,\n Department: %s,\n Gender: %s,\n Phone: %s,\n Email: %s,\n Address: %s,\n State of Origin: %s,\n Guardian's Phone: %s,\n Guardian's Email: %s,\n NIN: %s",
+                   students[i].name, students[i].program, students[i].matricNumber, students[i].CGPA,
+                   students[i].level, students[i].department, students[i].gender, students[i].phoneNumber,
+                   students[i].email, students[i].address, students[i].stateOfOrigin, students[i].guardianPhone,
+                   students[i].guardianEmail, students[i].NIN);
+        }
+    }
+    printf("\n\n");
+    printf("Postgraduate Program Students");
+    for (int i = 0; i < count; i++)
+    {
+        if (strcmp(students[i].program, "Postgraduate") == 0)
+        {
+            printf("\n Name: %s,\n Program: %s,\n Matric Number: %s,\n CGPA: %.2f,\n Level: %d,\n Department: %s,\n Gender: %s,\n Phone: %s,\n Email: %s,\n Address: %s,\n State of Origin: %s,\n Guardian's Phone: %s,\n Guardian's Email: %s,\n NIN: %s",
+                   students[i].name, students[i].program, students[i].matricNumber, students[i].CGPA,
+                   students[i].level, students[i].department, students[i].gender, students[i].phoneNumber,
+                   students[i].email, students[i].address, students[i].stateOfOrigin, students[i].guardianPhone,
+                   students[i].guardianEmail, students[i].NIN);
+        }
+    }
+    printf("\n\n");
 }
 
 void countStudents(struct Student students[], int count)
@@ -101,7 +146,7 @@ void countStudents(struct Student students[], int count)
             partTime++;
     }
 
-    printf("Total Undergraduate students: %d\n", undergrad);
+    printf("\n\nTotal Undergraduate students: %d\n", undergrad);
     printf("Total Postgraduate students: %d\n", postgrad);
     printf("Total Part-Time students: %d\n\n", partTime);
 }
@@ -124,13 +169,13 @@ void deleteStudent(struct Student students[], int *count)
                 students[j] = students[j + 1];
             }
             (*count)--;
-            printf("Student with matriculation number %s has been deleted.\n", matricNumber);
+            printf("Student with matriculation number %s has been deleted.\n\n\nWhat Else do you want to do?\n", matricNumber);
             break;
         }
     }
 
     if (!found)
-        printf("Student with matriculation number %s not found.\n", matricNumber);
+        printf("Student with matriculation number %s not found.\n\n", matricNumber);
 }
 
 int main()
@@ -141,6 +186,7 @@ int main()
 
     do
     {
+        printf("\n\nWelcome to Ladoke Akintola University Of Technology's Database\nWhat do you wish to do\nSelect your Choice\n");
         printf("1. Add Student\n2. View Students\n3. Count Students by Program\n4. Delete Student\n5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
